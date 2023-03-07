@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>Technotsav</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.0/examples/sign-in/signin.css" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin" onsubmit="return nextfun()" action = '/register'>
+      <img class="mb-4" src="{% static 'img/Logo.png' %}" alt=""  height="100">
+      <h1 class="h3 mb-3 font-weight-normal">To Register</h1>
+      <label for="inputEmail" class="sr-only">Roll Number</label>
+      <input type="text" name='roll' id="inputRoll" class="form-control  mb-3" placeholder="Roll Number" required autofocus>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" >Next</button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2023</p>
+    </form>
+    <script>
+      function nextfun(){
+        let roll = document.getElementById("inputRoll");
+        if(roll.value.length>=10)
+        {
+          return true;
+        }else{
+          alert("Enter Valid Roll Number");
+          return false;
+        }
+      }
+    </script>
+  </body>
+</html>

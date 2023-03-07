@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>.form-control:disabled, .form-control[readonly] {
+    background-color: #627385;
+    opacity: 1;
+}</style>
+    <section class="section coming-soon events" data-section="section3">
+        <div class="container">
+            <div class="row">
+                <div class="row">
+                    <div class="col-md-7 col-xs-12">
+                        <div class="continer centerIt">
+                            <img width="100%" src="{% static 'img/Logo.png' %}" alt="" srcset="">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="right-content">
+                            <div class="top-content">
+                                <h6>Register for <em>Technotsav 2023</em> march 28<sup>th</sup> & 29<sup>th</sup></h6>
+                            </div>
+                            <form id="register" name = "register"  onsubmit="return validateForm()" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                            <input name="name" type="text" class="form-control" id="name" placeholder="Your Name" {% if stu %} disabled value = {{stu.name}}{% endif %} required>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                            <input name="father" type="text" {% if stu %} disabled value = {{stu.father}}{% endif %} class="form-control" id="father" placeholder="Father Name" required>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                            <input type="text" name="college" {% if stu %} disabled value = {{stu.college}}{% else %} value = "MRIET" {% endif %} id="college" class="form-control" placeholder="College Name" required>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                            <input type="text" name="roll"{% if stu %} hidden value = {{stu.roll}}{% endif %} id="roll" class="form-control" placeholder="Roll Number" required>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                            <input name="branchNyear" type="text" {% if stu %} disabled value = {{stu.branchNyear}}{% endif %} class="form-control" id="branchNyear" placeholder="Branch & Year" required>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                            <input name="email" type="email" {% if stu %} hidden value = {{stu.email}}{% endif %} class="form-control" id="email" placeholder="Your Email" required>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                            <input name="wanumber" type="text" class="form-control" {% if stu %} hidden value = {{stu.wanumber}}{% endif %} id="wanumber" placeholder="Your WhatsApp Number" required>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-12">
+                                            <label><input type="checkbox" class="form-control" {% if stu %} {% if stu.paper %}checked{% endif %} {% endif %} name="paper"> Paper presentation</label><br>
+                                            <label><input type="checkbox" class="form-control" {% if stu %} {% if stu.poster %}checked{% endif %} {% endif %} name="poster"> Poster presentation</label><br>
+                                            <label><input type="checkbox" class="form-control" {% if stu %} {% if stu.debugging %}checked{% endif %} {% endif %} name="debugging"> Code debugging</label><br>
+                                            <label><input type="checkbox" class="form-control" {% if stu %} {% if stu.expo %}checked{% endif %} {% endif %} name="expo"> Project expo</label><br>
+                                            <label><input type="checkbox" class="form-control" {% if stu %} {% if stu.quiz %}checked{% endif %} {% endif %} name="quiz"> Technical quiz</label><br>
+                                            <label><input type="checkbox" class="form-control" {% if stu %} {% if stu.treasure %}checked{% endif %} {% endif %} name="treasure"> Treasure Hunt</label><br>
+                                            <label><input type="checkbox" class="form-control" {% if stu %} {% if stu.short %}checked{% endif %} {% endif %} name="short"> Short film</label><br>
+                                            <label><input type="checkbox" class="form-control" {% if stu %} {% if stu.conn %}checked{% endif %} {% endif %} name="conn"> Technical connection</label><br>
+                                            <label><input type="checkbox" class="form-control" {% if stu %} {% if stu.circuit %}checked{% endif %} {% endif %} name="circuitrix"> Circuitrix</label><br>
+                                            <label><input type="checkbox" class="form-control" {% if stu %} {% if stu.tinker %}checked{% endif %} {% endif %} name="tinker"> Tinker CAD</label><br>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                            <button type="submit" id="form-submit" class="button">Submit</button>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    
+    <script>
+        function validateForm() {
+          var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+          var isChecked = false;
+          for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+              isChecked = true;
+              break;
+            }
+          }
+          if (!isChecked) {
+            alert('Please select at least one Event');
+            return false;
+          }
+          return true;
+        }
+      </script>
+
+{% endblock content %}

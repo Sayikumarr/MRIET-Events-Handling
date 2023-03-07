@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<table class="table table-borderless table-dark">
+    <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">{{stu.name}}</th>
+          <th scope="col">College</th>
+          <th scope="col">{{stu.college}}</th>
+        </tr>
+        <tr>
+            <th scope="col">Roll Number</th>
+            <th scope="col">{{stu.roll}}</th>
+            <th scope="col">Branch & Year</th>
+            <th scope="col">{{stu.branchNyear}}</th>
+          </tr>
+    </thead>
+</table>
+<hr>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Event</th>
+        <th scope="col">Interested</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Paper presentation</td>
+        <td>{% if stu.paper %}Yes{% else %} No{% endif %}</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Poster presentation</td>
+        <td>{% if stu.poster %}Yes{% else %} No{% endif %}</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Code debugging</td>
+        <td>{% if stu.debugging %}Yes{% else %} No{% endif %}</td>
+      </tr>
+      <tr>
+        <th scope="row">4</th>
+        <td>Project expo</td>
+        <td>{% if stu.expo %}Yes{% else %} No{% endif %}</td>
+      </tr>
+      <tr>
+        <th scope="row">5</th>
+        <td>Technical quiz</td>
+        <td>{% if stu.quiz %}Yes{% else %} No{% endif %}</td>
+      </tr>
+      <tr>
+        <th scope="row">6</th>
+        <td>Treasure Hunt</td>
+        <td>{% if stu.treasure %}Yes{% else %} No{% endif %}</td>
+      </tr>
+      <tr>
+        <th scope="row">7</th>
+        <td>Short film</td>
+        <td>{% if stu.short %}Yes{% else %} No{% endif %}</td>
+      </tr>
+      <tr>
+        <th scope="row">8</th>
+        <td>Technical connection</td>
+        <td>{% if stu.conn %}Yes{% else %} No{% endif %}</td>
+      </tr>
+      <tr>
+        <th scope="row">9</th>
+        <td>Circuitrix</td>
+        <td>{% if stu.circuit %}Yes{% else %} No{% endif %}</td>
+      </tr>
+      <tr>
+        <th scope="row">10</th>
+        <td>Tinker CAD</td>
+        <td>{% if stu.tinker %}Yes{% else %} No{% endif %}</td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <table class="table table-borderless table-dark">
+    <thead>
+        <tr>
+          <th scope="col">Total</th>
+          <th scope="col">{{pay.total}}</th>
+        </tr>
+        <tr>
+            <th scope="col">Paid</th>
+            <th scope="col">{{pay.paid}}</th>
+          </tr>
+    </thead>
+</table>
+
+{% endblock content %}

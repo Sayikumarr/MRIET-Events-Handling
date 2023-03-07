@@ -1,0 +1,61 @@
+{% extends 'base2.html' %}
+{% block content %}
+<div class="container">
+   <form id="register" class="mt-5" name = "register"  onsubmit="return validateForm()" method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+         <input name="name" type="text" class="form-control" id="name" placeholder="Your Name" {% if stu %} hidden value = {{stu.name}}{% endif %} required>
+      </div>
+      <div class="mb-3">
+         <input name="father" type="text" {% if stu %} hidden value = {{stu.father}}{% endif %} class="form-control" id="father" placeholder="Father Name" required>
+      </div>
+      <div class="mb-3">
+         <input type="text" name="college" {% if stu %} hidden value = {{stu.college}}{% else %} value = "MRIET" {% endif %} id="college" class="form-control" placeholder="College Name" required>
+      </div>
+      <div class="mb-3">
+         <input type="text" name="roll"{% if stu %} hidden value = {{stu.roll}}{% endif %} id="roll" class="form-control" placeholder="Roll Number" required>
+      </div>
+      <div class="mb-3">
+         <input name="branchNyear" type="text" {% if stu %} hidden value = {{stu.branchNyear}}{% endif %} class="form-control" id="branchNyear" placeholder="Branch & Year" required>
+      </div>
+      <div class="mb-3">
+         <input name="email" type="email" {% if stu %} value = {{stu.email}}{% endif %} class="form-control" id="email" placeholder="Your Email" required>
+      </div>
+      <div class="mb-3">
+         <input name="wanumber" type="text" class="form-control" {% if stu %} hidden value = {{stu.wanumber}}{% endif %} id="wanumber" placeholder="Your WhatsApp Number" required>
+      </div>
+      <div class="mb-3"><label>
+         <input type="checkbox" class="form-check-input" {% if stu %} {% if stu.paper %}checked{% endif %} {% endif %} name="paper"> Paper presentation</label>
+      </div>
+      <div class="mb-3"><label>
+         <input type="checkbox" class="form-check-input" {% if stu %} {% if stu.poster %}checked{% endif %} {% endif %} name="poster"> Poster presentation</label>
+      </div>
+      <div class="mb-3"><label>
+         <input type="checkbox" class="form-check-input" {% if stu %} {% if stu.debugging %}checked{% endif %} {% endif %} name="debugging"> Code debugging</label>
+      </div>
+      <div class="mb-3"><label>
+         <input type="checkbox" class="form-check-input" {% if stu %} {% if stu.expo %}checked{% endif %} {% endif %} name="expo"> Project expo</label>
+      </div>
+      <div class="mb-3"><label>
+         <input type="checkbox" class="form-check-input" {% if stu %} {% if stu.quiz %}checked{% endif %} {% endif %} name="quiz"> Technical quiz</label>
+      </div>
+      <div class="mb-3"><label>
+         <input type="checkbox" class="form-check-input" {% if stu %} {% if stu.treasure %}checked{% endif %} {% endif %} name="treasure"> Treasure Hunt</label>
+      </div>
+      <div class="mb-3"><label>
+         <input type="checkbox" class="form-check-input" {% if stu %} {% if stu.short %}checked{% endif %} {% endif %} name="short"> Short film</label>
+      </div>
+      <div class="mb-3"><label>
+         <input type="checkbox" class="form-check-input" {% if stu %} {% if stu.conn %}checked{% endif %} {% endif %} name="conn"> Technical connection</label>
+      </div>
+      <div class="mb-3"><label>
+         <input type="checkbox" class="form-check-input" {% if stu %} {% if stu.circuit %}checked{% endif %} {% endif %} name="circuitrix"> Circuitrix</label>
+      </div>
+      <div class="mb-3"><label>
+         <input type="checkbox" class="form-check-input" {% if stu %} {% if stu.tinker %}checked{% endif %} {% endif %} name="tinker"> Tinker CAD</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <a href="/../dashboard" class="btn btn-primary">Cancel</a>
+   </form>
+</div>
+{% endblock content %}
