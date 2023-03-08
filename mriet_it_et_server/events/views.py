@@ -182,3 +182,21 @@ def getDetails(request,roll):
                 pay.save()
                 return redirect(dashboard)
     return render(request,'detailView.html',{'stu':stu})
+
+import csv
+from django.http import HttpResponse
+
+@login_required
+def export_to_excel(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="data.csv"'
+
+    # replace "Model" with the name of your model
+    writer = csv.writer(response)
+    writer.writerow(['Roll Number', 'Name', 'Father','College','Branch','Email','WhatsApp','Total','Paid','MODE(Cash)','Verified By']) # replace with your own fields
+
+    queryset = Payment.objects.all() # replace "Model" with the name of your model
+    for obj in queryset:
+        writer.writerow([obj.student.roll, obj.student.name,obj.student.father, obj.student.college,obj.student.branchNyear, obj.student.email, obj.student.wanumber,obj.total,obj.paid,obj.cash,obj.verifiedBy]) # replace with your own fields
+
+    return response

@@ -17,12 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth.views import LoginView,LogoutView
 from events.views import registerEvent,getroll
-from events.views import dashboard,done_payment,getDetails,paid,unpaid,pending
+from events.views import dashboard,done_payment,getDetails,paid,unpaid,pending,export_to_excel
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',getroll),
-    path('register',registerEvent),
+    path('register/',registerEvent),
     # path('register/<str:roll>',registerEvent),
     path('accounts/login/',LoginView.as_view(),name='login_url'),
     path('logout/',LogoutView.as_view(),name='logout_url'),
@@ -32,6 +32,7 @@ urlpatterns = [
     path('paid/',paid),
     path('unpaid/',unpaid),
     path('pending/',pending),
+    path('sai/export/',export_to_excel)
 ]
 
 from django.conf.urls.static import static
