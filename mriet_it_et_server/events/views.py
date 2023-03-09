@@ -45,7 +45,7 @@ def registerEvent(request,roll=None):
                 treasure = request.POST.get('treasure')
                 short = request.POST.get('short')
                 conn = request.POST.get('conn')
-                circuitrix = request.POST.get('circuitrix')
+                circuit = request.POST.get('circuit')
                 tinker = request.POST.get('tinker')
                 stu = Student.objects.get(roll=roll)
                 stu.paper = True if paper=='on' else False
@@ -56,7 +56,7 @@ def registerEvent(request,roll=None):
                 stu.treasure = True if treasure=='on' else False
                 stu.short = True if short=='on' else False
                 stu.conn = True if conn=='on' else False
-                stu.circuit = True if circuitrix=='on' else False
+                stu.circuit = True if circuit=='on' else False
                 stu.tinker = True if tinker=='on' else False
 
                 stu.save()
@@ -66,8 +66,8 @@ def registerEvent(request,roll=None):
                 pass
     if done:
         try:
-            evnts = [stu.paper,stu.poster,stu.debugging,stu.expo,stu.quiz,stu.treasure,stu.conn,stu.circuit,stu.tinker]
-            total = evnts.count(True)*50
+            evnts = [stu.paper,stu.poster,stu.debugging,stu.expo,stu.quiz,stu.treasure,stu.conn,stu.circuit,stu.tinker,stu.short]
+            total = evnts.count(True)*100
             pay = Payment()
             pay.student=stu
             pay.total = total
@@ -75,18 +75,19 @@ def registerEvent(request,roll=None):
         except Exception as e:
             print(e)
             pay = Payment.objects.get(student=stu)
-            total = evnts.count(True)*50
+            total = evnts.count(True)*100
             pay.total = total
             pay.save()
         return render(request,'paydetails.html',{'stu':stu,'pay':pay})
     return render(request,'register.html', {'stu':stu})
 
 def getroll(request):
+    stu = Stu_Coordinator.objects.all()
     # if request.method == "POST":
     #     roll = request.POST.get("roll")
     #     redirect.method = "GET"
     #     return registerEvent(request,roll)
-    return render(request,'roll.html')
+    return render(request,'roll.html',{'stu':stu})
 
 
 from django.db.models import Q
@@ -155,7 +156,7 @@ def getDetails(request,roll):
                 treasure = request.POST.get('treasure')
                 short = request.POST.get('short')
                 conn = request.POST.get('conn')
-                circuitrix = request.POST.get('circuitrix')
+                circuit = request.POST.get('circuit')
                 tinker = request.POST.get('tinker')
                 stu = Student.objects.get(roll=roll)
                 # stu.name = name
@@ -171,13 +172,13 @@ def getDetails(request,roll):
                 stu.treasure = True if treasure=='on' else False
                 stu.short = True if short=='on' else False
                 stu.conn = True if conn=='on' else False
-                stu.circuit = True if circuitrix=='on' else False
+                stu.circuit = True if circuit=='on' else False
                 stu.tinker = True if tinker=='on' else False
                 stu.save()
-                evnts = [stu.paper,stu.poster,stu.debugging,stu.expo,stu.quiz,stu.treasure,stu.conn,stu.circuit,stu.tinker]
-                total = evnts.count(True)*50
+                evnts = [stu.paper,stu.poster,stu.debugging,stu.expo,stu.quiz,stu.treasure,stu.conn,stu.circuit,stu.tinker,stu.short]
+                total = evnts.count(True)*100
                 pay = Payment.objects.get(student=stu)
-                total = evnts.count(True)*50
+                total = evnts.count(True)*100
                 pay.total = total
                 pay.save()
                 return redirect(dashboard)
