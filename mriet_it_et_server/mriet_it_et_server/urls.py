@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth.views import LoginView,LogoutView
 from events.views import registerEvent,getroll
-from events.views import dashboard,done_payment,getDetails,paid,unpaid,pending,export_to_excel
+from events.views import dashboard,done_payment,getDetails,paid,unpaid,pending,export_to_excel,filter_data
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,7 +32,8 @@ urlpatterns = [
     path('paid/',paid),
     path('unpaid/',unpaid),
     path('pending/',pending),
-    path('sai/export/',export_to_excel)
+    path('sai/export/',export_to_excel),
+    path('filter/',filter_data),
 ]
 
 from django.conf.urls.static import static

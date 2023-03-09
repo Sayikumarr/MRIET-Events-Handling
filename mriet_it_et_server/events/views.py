@@ -200,3 +200,31 @@ def export_to_excel(request):
         writer.writerow([obj.student.roll, obj.student.name,obj.student.father, obj.student.college,obj.student.branchNyear, obj.student.email, obj.student.wanumber,obj.total,obj.paid,obj.cash,obj.verifiedBy]) # replace with your own fields
 
     return response
+
+
+@login_required
+def filter_data(request):
+    if request.method == "POST":
+        filt = request.POST.get('filter')
+        if filt == "paper":
+            stu = Payment.objects.filter(Q(student__paper=True))
+        elif filt == 'poster':
+            stu = Payment.objects.filter(Q(student__poster=True))
+        elif filt == 'debugging':
+            stu = Payment.objects.filter(Q(student__debugging=True))
+        elif filt == 'expo':
+            stu = Payment.objects.filter(Q(student__expo=True))
+        elif filt == 'quiz':
+            stu = Payment.objects.filter(Q(student__quiz=True))
+        elif filt == 'treasure':
+            stu = Payment.objects.filter(Q(student__treasure=True))
+        elif filt == 'short':
+            stu = Payment.objects.filter(Q(student__short=True))
+        elif filt == 'conn':
+            stu = Payment.objects.filter(Q(student__conn=True))
+        elif filt == 'circuit':
+            stu = Payment.objects.filter(Q(student__circuit=True))
+        elif filt == 'tinker':
+            stu = Payment.objects.filter(Q(student__tinker=True))
+        return render(request,'dashboard.html',{'stu':stu})
+    return render(request,'filter.html')

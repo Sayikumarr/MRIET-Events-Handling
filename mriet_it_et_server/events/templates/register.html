@@ -24,37 +24,38 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <fieldset>
-                                            <input name="name" type="text" class="form-control" id="name" placeholder="Your Name" {% if stu %} disabled value = {{stu.name}}{% endif %} required>
+                                            <input name="name" type="text" class="form-control" id="name" placeholder="Your Name" {% if stu %} disabled value="{{stu.name}}" {% endif %} required>
                                         </fieldset>
                                     </div>
                                     <div class="col-md-12">
                                         <fieldset>
-                                            <input name="father" type="text" {% if stu %} disabled value = {{stu.father}}{% endif %} class="form-control" id="father" placeholder="Father Name" required>
+                                            <input name="father" type="text" {% if stu %} hidden value="{{stu.father}}" {% endif %} class="form-control" id="father" placeholder="Father Name" required>
                                         </fieldset>
                                     </div>
                                     <div class="col-md-12">
                                         <fieldset>
-                                            <input type="text" name="college" {% if stu %} disabled value = {{stu.college}}{% else %} value = "MRIET" {% endif %} id="college" class="form-control" placeholder="College Name" required>
+                                            <input type="text" name="college" {% if stu %} disabled value="{{stu.college}}" {% else %} value = "MRIET" {% endif %} id="college" class="form-control" placeholder="College Name" required>
                                         </fieldset>
                                     </div>
                                     <div class="col-md-12">
                                         <fieldset>
-                                            <input type="text" name="roll"{% if stu %} hidden value = {{stu.roll}}{% endif %} id="roll" class="form-control" placeholder="Roll Number" required>
+                                            <input type="text" name="roll"{% if stu %} hidden value="{{stu.roll}}" {% endif %} id="roll" class="form-control" placeholder="Roll Number" required>
+                                            {% if stu %} <p class='form-control'>{{stu.roll}}</p>{% endif %}
                                         </fieldset>
                                     </div>
                                     <div class="col-md-12">
                                         <fieldset>
-                                            <input name="branchNyear" type="text" {% if stu %} disabled value = {{stu.branchNyear}}{% endif %} class="form-control" id="branchNyear" placeholder="Branch & Year" required>
+                                            <input name="branchNyear" type="text" {% if stu %} disabled value="{{stu.branchNyear}}" {% endif %} class="form-control" id="branchNyear" placeholder="Branch & Year" required>
                                         </fieldset>
                                     </div>
                                     <div class="col-md-12">
                                         <fieldset>
-                                            <input name="email" type="email" {% if stu %} hidden value = {{stu.email}}{% endif %} class="form-control" id="email" placeholder="Your Email" required>
+                                            <input name="email" type="email" {% if stu %} hidden value="{{stu.email}}" {% endif %} class="form-control" id="email" placeholder="Your Email" required>
                                         </fieldset>
                                     </div>
                                     <div class="col-md-12">
                                         <fieldset>
-                                            <input name="wanumber" type="text" class="form-control" {% if stu %} hidden value = {{stu.wanumber}}{% endif %} id="wanumber" placeholder="Your WhatsApp Number" required>
+                                            <input name="wanumber" type="text" class="form-control" {% if stu %} hidden value="{{stu.wanumber}}" {% endif %} id="wanumber" placeholder="Your WhatsApp Number" required>
                                         </fieldset>
                                     </div>
                                     <div class="col-md-12">
@@ -81,7 +82,7 @@
                 </div>
             </div>
     </section>
-    
+
     <script>
         function validateForm() {
           var checkboxes = document.querySelectorAll('input[type="checkbox"]');

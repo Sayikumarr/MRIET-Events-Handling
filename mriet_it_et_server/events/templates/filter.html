@@ -1,0 +1,31 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+<div class = "container mt-5">
+<div class="h-100 p-5 text-bg-dark rounded-3">
+    <h2>Filter Student Details</h2>
+      <form method = "POST">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Select a Event : </td>
+                <td><select name="filter">
+                    <option value="paper">Paper Presentation</option>
+                    <option value="poster">Poster Presentation</option>
+                    <option value="debugging">Code Debugging</option>
+                    <option value="expo">Project Expo</option>
+                    <option value="quiz">Technical Quiz</option>
+                    <option value="treasure">Treasure Hunt</option>
+                    <option value="short">Short Film</option>
+                    <option value="conn">Technical Connection</option>
+                    <option value="circuit">Circuitrix</option>
+                    <option value="tinker">Tinker CAD</option>
+               </select></td>
+            <tr>
+                <td><input type="submit" class="btn btn-outline-light" value="Get"> </td>
+            </tr>
+        </table>
+      </form> 
+  </div>
+</div>
+{% endblock content %}

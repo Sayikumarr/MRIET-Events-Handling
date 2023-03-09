@@ -18,7 +18,7 @@
                 {% for student in stu %}
                   <tr>
                     <th scope="row">{{forloop.counter}}</th>
-                    <td><a href="detail/{{student.student.roll}}">{{student.student.roll}}</a></td>
+                    <td><a href="/dashboard/detail/{{student.student.roll}}">{{student.student.roll}}</a></td>
                     <td>{{student.student.name}}</td>
                     <td>{{student.student.branchNyear}}</td>
                     <td>{{student.paid}} / {{student.total}}</td>
