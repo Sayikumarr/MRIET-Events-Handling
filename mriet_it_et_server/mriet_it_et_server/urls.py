@@ -22,18 +22,18 @@ from events.views import dashboard,done_payment,getDetails,paid,unpaid,pending,e
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',getroll),
-    path('register/',registerEvent),
+    path('register',registerEvent),
     # path('register/<str:roll>',registerEvent),
-    path('accounts/login/',LoginView.as_view(),name='login_url'),
-    path('logout/',LogoutView.as_view(),name='logout_url'),
+    path('accounts/login',LoginView.as_view(),name='login_url'),
+    path('logout',LogoutView.as_view(),name='logout_url'),
     path('payment/paid/<str:roll>',done_payment),
     path('dashboard/detail/<str:roll>',getDetails),
-    path('dashboard/',dashboard),
-    path('paid/',paid),
-    path('unpaid/',unpaid),
-    path('pending/',pending),
-    path('sai/export/',export_to_excel),
-    path('filter/',filter_data),
+    path('dashboard',dashboard),
+    path('paid',paid),
+    path('unpaid',unpaid),
+    path('pending',pending),
+    path('export',export_to_excel),
+    path('filter',filter_data),
 ]
 
 from django.conf.urls.static import static

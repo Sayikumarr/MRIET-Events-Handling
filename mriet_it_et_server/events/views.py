@@ -128,8 +128,8 @@ def done_payment(request,roll):
         cashMode = request.POST.get("mode")
         pay.paid = amount
         pay.cash = True if cashMode=="1" else False
-        coord = Stu_Coordinator(user=request.user)
-        pay.verifiedBy = coord.rollno
+        # coord = Stu_Coordinator(user=request.user)
+        pay.verifiedBy = request.user.username
         pay.save()
         return redirect(dashboard)
     return render(request,'payment.html',{'pay':pay})
