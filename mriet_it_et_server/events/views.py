@@ -39,7 +39,7 @@ def registerEvent(request,roll=None):
                 # wanumber = request.POST.get('wanumber')
                 paper = request.POST.get('paper')
                 poster = request.POST.get('poster')
-                debugging = request.POST.get('debugging')
+                codigo = request.POST.get('codigo')
                 expo = request.POST.get('expo')
                 quiz = request.POST.get('quiz')
                 treasure = request.POST.get('treasure')
@@ -47,10 +47,12 @@ def registerEvent(request,roll=None):
                 conn = request.POST.get('conn')
                 circuit = request.POST.get('circuit')
                 tinker = request.POST.get('tinker')
+                logo = request.POST.get('logo')
+                shark = request.POST.get('shark')
                 stu = Student.objects.get(roll=roll)
                 stu.paper = True if paper=='on' else False
                 stu.poster = True if poster=='on' else False
-                stu.debugging = True if debugging=='on' else False
+                stu.codigo = True if codigo=='on' else False
                 stu.expo = True if expo=='on' else False
                 stu.quiz = True if quiz=='on' else False
                 stu.treasure = True if treasure=='on' else False
@@ -58,6 +60,8 @@ def registerEvent(request,roll=None):
                 stu.conn = True if conn=='on' else False
                 stu.circuit = True if circuit=='on' else False
                 stu.tinker = True if tinker=='on' else False
+                stu.logo = True if logo=='on' else False
+                stu.shark = True if shark=='on' else False
 
                 stu.save()
                 done = True
@@ -66,7 +70,7 @@ def registerEvent(request,roll=None):
                 pass
     if done:
         try:
-            evnts = [stu.paper,stu.poster,stu.debugging,stu.expo,stu.quiz,stu.treasure,stu.conn,stu.circuit,stu.tinker,stu.short]
+            evnts = [stu.paper,stu.poster,stu.codigo,stu.expo,stu.quiz,stu.treasure,stu.conn,stu.circuit,stu.tinker,stu.short,stu.logo,stu.shark]
             total = evnts.count(True)*100
             pay = Payment()
             pay.student=stu
@@ -150,7 +154,7 @@ def getDetails(request,roll):
                 wanumber = request.POST.get('wanumber')
                 paper = request.POST.get('paper')
                 poster = request.POST.get('poster')
-                debugging = request.POST.get('debugging')
+                codigo = request.POST.get('codigo')
                 expo = request.POST.get('expo')
                 quiz = request.POST.get('quiz')
                 treasure = request.POST.get('treasure')
@@ -158,6 +162,8 @@ def getDetails(request,roll):
                 conn = request.POST.get('conn')
                 circuit = request.POST.get('circuit')
                 tinker = request.POST.get('tinker')
+                logo = request.POST.get('logo')
+                shark = request.POST.get('shark')
                 stu = Student.objects.get(roll=roll)
                 # stu.name = name
                 # stu.father = father
@@ -166,7 +172,7 @@ def getDetails(request,roll):
                 stu.email = email
                 stu.paper = True if paper=='on' else False
                 stu.poster = True if poster=='on' else False
-                stu.debugging = True if debugging=='on' else False
+                stu.codigo = True if codigo=='on' else False
                 stu.expo = True if expo=='on' else False
                 stu.quiz = True if quiz=='on' else False
                 stu.treasure = True if treasure=='on' else False
@@ -174,8 +180,10 @@ def getDetails(request,roll):
                 stu.conn = True if conn=='on' else False
                 stu.circuit = True if circuit=='on' else False
                 stu.tinker = True if tinker=='on' else False
+                stu.logo = True if logo=='on' else False
+                stu.shark = True if shark=='on' else False
                 stu.save()
-                evnts = [stu.paper,stu.poster,stu.debugging,stu.expo,stu.quiz,stu.treasure,stu.conn,stu.circuit,stu.tinker,stu.short]
+                evnts = [stu.paper,stu.poster,stu.codigo,stu.expo,stu.quiz,stu.treasure,stu.conn,stu.circuit,stu.tinker,stu.short,stu.logo,stu.shark]
                 total = evnts.count(True)*100
                 pay = Payment.objects.get(student=stu)
                 total = evnts.count(True)*100
@@ -211,8 +219,8 @@ def filter_data(request):
             stu = Payment.objects.filter(Q(student__paper=True))
         elif filt == 'poster':
             stu = Payment.objects.filter(Q(student__poster=True))
-        elif filt == 'debugging':
-            stu = Payment.objects.filter(Q(student__debugging=True))
+        elif filt == 'codigo':
+            stu = Payment.objects.filter(Q(student__codigo=True))
         elif filt == 'expo':
             stu = Payment.objects.filter(Q(student__expo=True))
         elif filt == 'quiz':
@@ -227,5 +235,19 @@ def filter_data(request):
             stu = Payment.objects.filter(Q(student__circuit=True))
         elif filt == 'tinker':
             stu = Payment.objects.filter(Q(student__tinker=True))
+        elif filt == 'logo':
+            stu = Payment.objects.filter(Q(student__logo=True))
+        elif filt == 'shark':
+            stu = Payment.objects.filter(Q(student__shark=True))
         return render(request,'dashboard.html',{'stu':stu})
     return render(request,'filter.html')
+
+@login_required
+def overallpaymentDetails(request):
+    payments = Payment.objects.all()
+    paid=total=0
+    for pay in payments:
+        total+=pay.total
+        paid+=pay.paid
+    due=total-paid
+    return render(request,'overallpay.html',{'total':total,'paid':paid,'due':due})

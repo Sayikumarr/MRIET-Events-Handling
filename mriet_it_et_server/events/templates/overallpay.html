@@ -1,0 +1,25 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+<br><br>
+<div class="container">
+<div class="jumbotron">
+    <table class="table table-striped">
+        <tbody>
+        <tr>
+            <th scope="col">Total</th>
+            <td>{{total}}</td>
+        </tr>
+        <tr>
+            <th scope="col">Paid</th>
+            <td>{{paid}}</td>
+        </tr>
+        <tr>
+            <th scope="col">Pending</th>
+            <td>{{due}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+{% endblock content %}

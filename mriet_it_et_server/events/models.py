@@ -13,7 +13,7 @@ class Student(models.Model):
 	wanumber = models.BigIntegerField(null=False)
 	paper = models.BooleanField(default=False)
 	poster = models.BooleanField(default=False)
-	debugging = models.BooleanField(default=False)
+	codigo = models.BooleanField(default=False)
 	expo = models.BooleanField(default=False)
 	quiz = models.BooleanField(default=False)
 	treasure = models.BooleanField(default=False)
@@ -21,6 +21,8 @@ class Student(models.Model):
 	conn = models.BooleanField(default=False)
 	circuit = models.BooleanField(default=False)
 	tinker = models.BooleanField(default=False)
+	logo = models.BooleanField(default=False)
+	shark = models.BooleanField(default=False)
 
 
 	def save(self, *args, **kwargs):

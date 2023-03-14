@@ -144,7 +144,7 @@
         formData.append('csrfmiddlewaretoken', token);
         formData.append('keyword', keyword);
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/dashboard/');
+        xhr.open('POST', '/dashboard');
         xhr.onload = function() {
           if (xhr.status === 200) {
             var responseHtml = xhr.responseText;
