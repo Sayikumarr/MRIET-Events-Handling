@@ -34,8 +34,11 @@
                                     </div>
                                     <div class="col-md-12">
                                         <fieldset>
-                                            <input type="text" name="college" {% if stu %} disabled value="{{stu.college}}" {% else %} value = "MRIET" {% endif %} id="college" class="form-control" placeholder="College Name" required>
+                                            <input type="text" name="college" {% if stu %} disabled value="{{stu.college}}" {% endif %} list="collgeName"  id="college" class="form-control" placeholder="College Name" required>
                                         </fieldset>
+                                        <datalist id="collgeName">
+                                            <option value="MRIET">MRIET</option>
+                                        </datalist>
                                     </div>
                                     <div class="col-md-12">
                                         <fieldset>

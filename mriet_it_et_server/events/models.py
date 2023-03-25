@@ -41,6 +41,11 @@ class Payment(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
+	def save(self, *args, **kwargs):
+		if self.student.college == "MRIET":
+			self.total = self.total/2
+		super().save(*args, **kwargs)
+
 	def __str__(self):
 		return self.student.roll
 
