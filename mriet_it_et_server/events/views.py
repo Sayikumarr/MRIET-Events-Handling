@@ -127,10 +127,13 @@ def pending(request):
 def done_payment(request,roll):
     stu = Student.objects.get(roll=roll)
     pay = Payment.objects.get(student=stu)
+    evnts = [stu.paper,stu.poster,stu.codigo,stu.expo,stu.quiz,stu.treasure,stu.conn,stu.circuit,stu.tinker,stu.short,stu.logo,stu.shark]
+    total = evnts.count(True)*100
     if request.method=="POST":
         amount = request.POST.get("paid")
         cashMode = request.POST.get("mode")
         pay.paid = amount
+        pay.total = total
         pay.cash = True if cashMode=="1" else False
         # coord = Stu_Coordinator(user=request.user)
         pay.verifiedBy = request.user.username
