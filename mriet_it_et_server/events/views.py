@@ -71,7 +71,10 @@ def registerEvent(request,roll=None):
     if done:
         try:
             evnts = [stu.paper,stu.poster,stu.codigo,stu.expo,stu.quiz,stu.treasure,stu.conn,stu.circuit,stu.tinker,stu.short,stu.logo,stu.shark]
-            total = evnts.count(True)*100
+            if stu.college == "MRIET":
+                total = evnts.count(True)*50
+            else:
+                total = evnts.count(True)*100
             pay = Payment()
             pay.student=stu
             pay.total = total
@@ -79,7 +82,10 @@ def registerEvent(request,roll=None):
         except Exception as e:
             print(e)
             pay = Payment.objects.get(student=stu)
-            total = evnts.count(True)*100
+            if stu.college == "MRIET":
+                total = evnts.count(True)*50
+            else:
+                total = evnts.count(True)*100
             pay.total = total
             pay.save()
         return render(request,'paydetails.html',{'stu':stu,'pay':pay})
@@ -128,7 +134,10 @@ def done_payment(request,roll):
     stu = Student.objects.get(roll=roll)
     pay = Payment.objects.get(student=stu)
     evnts = [stu.paper,stu.poster,stu.codigo,stu.expo,stu.quiz,stu.treasure,stu.conn,stu.circuit,stu.tinker,stu.short,stu.logo,stu.shark]
-    total = evnts.count(True)*100
+    if stu.college == "MRIET":
+        total = evnts.count(True)*50
+    else:
+        total = evnts.count(True)*100
     if request.method=="POST":
         amount = request.POST.get("paid")
         cashMode = request.POST.get("mode")
@@ -187,9 +196,11 @@ def getDetails(request,roll):
                 stu.shark = True if shark=='on' else False
                 stu.save()
                 evnts = [stu.paper,stu.poster,stu.codigo,stu.expo,stu.quiz,stu.treasure,stu.conn,stu.circuit,stu.tinker,stu.short,stu.logo,stu.shark]
-                total = evnts.count(True)*100
                 pay = Payment.objects.get(student=stu)
-                total = evnts.count(True)*100
+                if stu.college == "MRIET":
+                    total = evnts.count(True)*50
+                else:
+                    total = evnts.count(True)*100
                 pay.total = total
                 pay.save()
                 return redirect(dashboard)

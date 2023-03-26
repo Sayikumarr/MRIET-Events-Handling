@@ -85,7 +85,7 @@
       <td>Shark Tank</td>
       <td>{% if stu.shark %}Yes{% else %} No{% endif %}</td>
     </tr>
-    {% if pay.paid <= pay.total %}
+    {% if pay.paid < pay.total %}
     <tr class="bg-warning">
       <th scope="col">Payment Mode! </th>
       <th scope="col"><a type="button" class="btn btn-success" data-toggle="modal" data-target="#cashModeModal" >Offline (Cash)</a></th>
