@@ -71,7 +71,7 @@ def registerEvent(request,roll=None):
     if done:
         try:
             evnts = [stu.paper,stu.poster,stu.codigo,stu.expo,stu.quiz,stu.treasure,stu.conn,stu.circuit,stu.tinker,stu.short,stu.logo,stu.shark]
-            if stu.college == "MRIET":
+            if "w9" in stu.roll.lower():
                 total = evnts.count(True)*50
             else:
                 total = evnts.count(True)*100
@@ -82,7 +82,7 @@ def registerEvent(request,roll=None):
         except Exception as e:
             print(e)
             pay = Payment.objects.get(student=stu)
-            if stu.college == "MRIET":
+            if "w9" in stu.roll.lower():
                 total = evnts.count(True)*50
             else:
                 total = evnts.count(True)*100
@@ -134,7 +134,7 @@ def done_payment(request,roll):
     stu = Student.objects.get(roll=roll)
     pay = Payment.objects.get(student=stu)
     evnts = [stu.paper,stu.poster,stu.codigo,stu.expo,stu.quiz,stu.treasure,stu.conn,stu.circuit,stu.tinker,stu.short,stu.logo,stu.shark]
-    if stu.college == "MRIET":
+    if "w9" in stu.roll.lower():
         total = evnts.count(True)*50
     else:
         total = evnts.count(True)*100
@@ -197,7 +197,7 @@ def getDetails(request,roll):
                 stu.save()
                 evnts = [stu.paper,stu.poster,stu.codigo,stu.expo,stu.quiz,stu.treasure,stu.conn,stu.circuit,stu.tinker,stu.short,stu.logo,stu.shark]
                 pay = Payment.objects.get(student=stu)
-                if stu.college == "MRIET":
+                if "w9" in stu.roll.lower():
                     total = evnts.count(True)*50
                 else:
                     total = evnts.count(True)*100
@@ -264,4 +264,10 @@ def overallpaymentDetails(request):
         total+=pay.total
         paid+=pay.paid
     due=total-paid
-    return render(request,'overallpay.html',{'total':total,'paid':paid,'due':due})
+    user_verified_payments = Payment.objects.filter(verifiedBy=request.user.username)
+    cu_paid=cu_total=0
+    for cu_pay in user_verified_payments:
+        cu_total+=cu_pay.total
+        cu_paid+=cu_pay.paid
+        cu_due=cu_total-cu_paid
+    return render(request,'overallpay.html',{'total':total,'paid':paid,'due':due,'cu_total':cu_total,'cu_paid':cu_paid,'cu_due':cu_due})

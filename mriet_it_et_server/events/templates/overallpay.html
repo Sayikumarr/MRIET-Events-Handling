@@ -7,6 +7,9 @@
     <table class="table table-striped">
         <tbody>
         <tr>
+            <th class="text-center text-bg-primary" colspan=2 >Over All Payments Details</th>
+        </tr>
+        <tr>
             <th scope="col">Total</th>
             <td>{{total}}</td>
         </tr>
@@ -17,6 +20,24 @@
         <tr>
             <th scope="col">Pending</th>
             <td>{{due}}</td>
+        </tr>
+        <tr>
+            <td colspan=2><hr></tr>
+        </tr>
+        <tr>
+            <th class="text-center text-bg-success" colspan=2 >Payments Done By Me!</th>
+        </tr>
+        <tr>
+            <th scope="col">Total</th>
+            <td>{{cu_total}}</td>
+        </tr>
+        <tr>
+            <th scope="col">Paid</th>
+            <td>{{cu_paid}}</td>
+        </tr>
+        <tr>
+            <th scope="col">Pending</th>
+            <td>{{cu_due}}</td>
         </tr>
         </tbody>
     </table>
