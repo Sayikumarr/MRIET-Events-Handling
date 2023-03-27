@@ -3,7 +3,7 @@
 {% block content %}
 <br>
 <div class="container">
-  <div class="table-responsive">
+    <div class="table-responsive">
         <table class="table table-striped">
                 <thead>
                   <tr>
@@ -11,8 +11,9 @@
                     <th scope="col">Roll Number</th>
                     <th scope="col">Name</th>
                     <th scope="col">Branch & Year</th>
-                    <th scope="col">Paid / Total</th>
-                    <th scope="col">Payment</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">On</th>
+                    <th scope="col">Verified by</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -22,12 +23,13 @@
                     <td><a href="/dashboard/detail/{{student.student.roll}}">{{student.student.roll}}</a></td>
                     <td>{{student.student.name}}</td>
                     <td>{{student.student.branchNyear}}</td>
-                    <td>{{student.paid}} / {{student.total}}</td>
-                    <td>{% if student.paid == student.total %} Paid {% else %} <a href="/payment/paid/{{student.student.roll}}" class="btn btn-success btn-sm">Pay</a> {% endif %}</td>
+                    <td>{{student.paid}}</td>
+                    <td>{{student.updated_at}}</td>
+                    <td>{{student.verifiedBy}}</td>
                   </tr>
                 {% endfor %}
             </tbody>
         </table>
-      </div>
+    </div>
 </div>
 {% endblock content %}

@@ -116,7 +116,7 @@ from django.db.models import F
 @login_required
 def paid(request):
     stu = Payment.objects.filter(paid=F('total'))
-    return render(request,'dashboard.html',{'stu':stu})
+    return render(request,'paid.html',{'stu':stu})
 
 @login_required
 def unpaid(request):
@@ -264,10 +264,13 @@ def overallpaymentDetails(request):
         total+=pay.total
         paid+=pay.paid
     due=total-paid
-    user_verified_payments = Payment.objects.filter(verifiedBy=request.user.username)
-    cu_paid=cu_total=0
-    for cu_pay in user_verified_payments:
-        cu_total+=cu_pay.total
-        cu_paid+=cu_pay.paid
-        cu_due=cu_total-cu_paid
-    return render(request,'overallpay.html',{'total':total,'paid':paid,'due':due,'cu_total':cu_total,'cu_paid':cu_paid,'cu_due':cu_due})
+    cu_paid=cu_total=cu_due=0
+    try:
+        user_verified_payments = Payment.objects.filter(verifiedBy=request.user.username)
+        for cu_pay in user_verified_payments:
+            cu_total+=cu_pay.total
+            cu_paid+=cu_pay.paid
+            cu_due=cu_total-cu_paid
+    except:
+        pass
+    return render(request,'overallpay.html',{'total':total,'paid':paid,'due':due,'cu_total':cu_total,'cu_paid':cu_paid,'cu_due':cu_due,"stu":user_verified_payments})

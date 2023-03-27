@@ -41,6 +41,34 @@
         </tr>
         </tbody>
     </table>
+    <br>
+    <div class="table-responsive">
+        <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Roll Number</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Branch & Year</th>
+                    <th scope="col">Paid/Total</th>
+                    <th scope="col">On</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for student in stu %}
+                  <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td><a href="/dashboard/detail/{{student.student.roll}}">{{student.student.roll}}</a></td>
+                    <td>{{student.student.name}}</td>
+                    <td>{{student.student.branchNyear}}</td>
+                    <td>{{student.paid}}/{{student.total}}</td>
+                    <td>{{student.updated_at}}</td>
+                  </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
 </div>
-</div>
+
 {% endblock content %}
